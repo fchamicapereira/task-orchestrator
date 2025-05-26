@@ -25,5 +25,5 @@ if __name__ == "__main__":
         ],
     )
 
-    o.visualize(dot_file=Path("/tmp/orchestrator_example_in_place.dot"))
+    o.visualize(dot_file=Path(__file__).parent / "orchestrator_example_in_place.dot")
     o.run()

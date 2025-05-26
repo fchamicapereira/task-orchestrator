@@ -1,0 +1,14 @@
+// Execution Plan
+digraph {
+	graph [rankdir=LR]
+	node [shape=box style=filled]
+	// Initial Tasks
+	subgraph cluster_0 {
+		label="Initial Tasks"
+		task1 [label=task1 fillcolor=cyan]
+	}
+	// Final Tasks
+	subgraph cluster_1 {
+		label="Final Tasks"
+	}
+}

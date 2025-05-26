@@ -1,0 +1,21 @@
+[build-system]
+requires      = [ "setuptools>=61.0" ]
+build-backend = "setuptools.build_meta"
+
+[project]
+name            = "TaskOrchestrator"
+version         = "0.1.0"
+authors         = [ { name = "Francisco Pereira", email = "fchamicapereira@gmail.com" } ]
+description     = "A short description of my amazing Python library."
+readme          = "README.md"
+requires-python = ">=3.8"
+classifiers     = [ "Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License", "Operating System :: OS Independent" ]
+keywords        = [ "utility", "example" ]
+
+# [project.urls]
+# Homepage = "https://github.com/yourusername/my_project"
+# "Bug Tracker" = "https://github.com/yourusername/my_project/issues"
+
+# Optional: If your library provides command-line entry points
+# [project.scripts]
+# my-command = "my_library.module_a:main_function"

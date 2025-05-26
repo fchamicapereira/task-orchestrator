@@ -15,5 +15,5 @@ if __name__ == "__main__":
 
     o.add_task(Task("task1", "sleep 100000"))
 
-    o.visualize(dot_file=Path(__file__).parent / "orchestrator_example_interrupt.dot")
+    o.visualize(dot_file=Path(__file__).parent / "interrupt.dot")
     o.run()

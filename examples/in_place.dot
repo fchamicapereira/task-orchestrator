@@ -12,8 +12,8 @@ digraph {
 	subgraph cluster_1 {
 		label="Final Tasks"
 		task4 [label=task4 fillcolor=cyan]
-		task5 [label=task5 fillcolor=cyan]
 		task2 [label=task2 fillcolor=cyan]
+		task5 [label=task5 fillcolor=cyan]
 	}
 	task1 -> task2
 	task3 -> task4

@@ -6,16 +6,12 @@ build-backend = "setuptools.build_meta"
 name            = "TaskOrchestrator"
 version         = "0.1.0"
 authors         = [ { name = "Francisco Pereira", email = "fchamicapereira@gmail.com" } ]
-description     = "A short description of my amazing Python library."
+description     = "A task orchestrator for running tasks in parallel while managing dependencies and execution order."
 readme          = "README.md"
 requires-python = ">=3.8"
 classifiers     = [ "Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License", "Operating System :: OS Independent" ]
-keywords        = [ "utility", "example" ]
+keywords        = [ "utility", "tasks", "bash", "parallelism" ]
 
 # [project.urls]
 # Homepage = "https://github.com/yourusername/my_project"
 # "Bug Tracker" = "https://github.com/yourusername/my_project/issues"
-
-# Optional: If your library provides command-line entry points
-# [project.scripts]
-# my-command = "my_library.module_a:main_function"

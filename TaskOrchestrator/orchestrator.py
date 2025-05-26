@@ -19,6 +19,7 @@ DONE_COLOR = "green"
 SKIP_COLOR = "yellow"
 ERROR_COLOR = "red"
 DEBUG_COLOR = "white"
+ABORT_COLOR = "magenta"
 
 
 class Task:
@@ -140,30 +141,43 @@ class Task:
 
         self.log("spawning", color=SPAWN_COLOR)
 
-        process = await asyncio.create_subprocess_exec(
-            *self.cmd.split(" "),
-            stdout=PIPE,
-            stderr=STDOUT,
-            bufsize=0,
-            cwd=self.cwd,
-            env={**self.env_vars, **dict(list(os.environ.items()))},
-        )
+        try:
+            process = await asyncio.create_subprocess_exec(
+                *self.cmd.split(" "),
+                stdout=PIPE,
+                stderr=STDOUT,
+                bufsize=0,
+                cwd=self.cwd,
+                env={**self.env_vars, **dict(list(os.environ.items()))},
+            )
 
-        assert process, "Process creation failed"
+            assert process, "Process creation failed"
 
-        stdout_data, _ = await process.communicate()
-        stdout = stdout_data.decode().strip() if stdout_data else ""
+            stdout_data, _ = await process.communicate()
+            stdout = stdout_data.decode().strip() if stdout_data else ""
 
-        if process.returncode != 0 or self.show_cmds_output:
-            if process.returncode != 0:
-                self.log(f"command failed with return code {process.returncode}", color=ERROR_COLOR)
-                self.log("command:", color=ERROR_COLOR)
-                print(self.cmd)
-                self.log("output:", color=ERROR_COLOR)
-                print(stdout)
+            assert process.returncode is not None, "Process return code is None"
+
+            if process.returncode < 0:
+                self.log(f"terminated by signal {-process.returncode}", color=ABORT_COLOR)
                 return False
-            elif not self.silence:
-                print(stdout)
+
+            if process.returncode != 0 or self.show_cmds_output:
+                if process.returncode != 0:
+                    self.log(f"failed with return code {process.returncode}", color=ERROR_COLOR)
+                    self.log("command:", color=ERROR_COLOR)
+                    print(self.cmd)
+                    self.log("output:", color=ERROR_COLOR)
+                    print(stdout)
+                    return False
+                elif not self.silence:
+                    print(stdout)
+        except asyncio.CancelledError:
+            self.log("task was cancelled", color=ERROR_COLOR)
+            return False
+        except Exception as e:
+            self.log(f"error while executing command: {e}", color=ERROR_COLOR)
+            return False
 
         self._end()
 

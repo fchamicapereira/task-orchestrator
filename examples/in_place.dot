@@ -5,18 +5,18 @@ digraph {
 	// Initial Tasks
 	subgraph cluster_0 {
 		label="Initial Tasks"
-		task1 [label=task1 fillcolor=cyan]
 		task3 [label=task3 fillcolor=cyan]
+		task1 [label=task1 fillcolor=cyan]
 	}
 	// Final Tasks
 	subgraph cluster_1 {
 		label="Final Tasks"
-		task4 [label=task4 fillcolor=cyan]
 		task2 [label=task2 fillcolor=cyan]
+		task4 [label=task4 fillcolor=cyan]
 		task5 [label=task5 fillcolor=cyan]
 	}
-	task1 -> task2
-	task3 -> task4
-	task3 -> task2
 	task3 -> task5
+	task3 -> task2
+	task3 -> task4
+	task1 -> task2
 }
